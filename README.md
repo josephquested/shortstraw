@@ -1,2 +1,2 @@
-# shortstraw
-task delegation made easy(ish)
+## shortstraw
+### task delegation made easy(ish)
