@@ -1,3 +1,5 @@
+/* main tags */
+
 body {
   font-family: 'Josefin Sans', sans-serif;
   background-color: rgb(255, 252, 230);
@@ -6,4 +8,23 @@ body {
 h1 {
   font-size: 5vw;
   text-align: center;
+}
+
+div {
+  border-style: solid;
+  border-color: rgb(156, 234, 255);
+}
+
+ul {
+  list-style-type: none;
+}
+
+input {
+  text-align: left;
+}
+
+/* div classes */
+
+.user-list {
+
 }
