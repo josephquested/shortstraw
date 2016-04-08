@@ -3,23 +3,27 @@ import UserList from './UserList'
 import AddUserForm from './AddUserForm'
 
 export default React.createClass({
-  getInitialState: function () {
-    return {
-      users: this.props.appState.users
-    }
+  addUser: function (user) {
+    if (user === '') return
+    Ω(`I'm going to add the user: ${user}`)
+    this.props.store.dispatch({
+      type: 'ADD USER',
+      state: this.props.appState,
+      user: user
+    })
   },
 
-  addUser: function (name) {
-    if (name === '') return
-    Ω(`I'm going to add the user: ${name}`)
-    this.props.store()
+  generateUserList: function () {
+    return this.props.appState.users.map((user) => {
+      return (<li>{user}</li>)
+    })
   },
 
   render () {
     return (
       <div className='app'>
         <h1>shortstraw</h1>
-        <UserList users={this.state.users} />
+        <UserList users={this.generateUserList()} />
         <AddUserForm addUser={this.addUser} />
       </div>
     )

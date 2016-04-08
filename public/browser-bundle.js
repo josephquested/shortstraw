@@ -19759,16 +19759,24 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'App',
 	
-	  getInitialState: function getInitialState() {
-	    return {
-	      users: this.props.appState.users
-	    };
+	  addUser: function addUser(user) {
+	    if (user === '') return;
+	    Ω('I\'m going to add the user: ' + user);
+	    this.props.store.dispatch({
+	      type: 'ADD USER',
+	      state: this.props.appState,
+	      user: user
+	    });
 	  },
 	
-	  addUser: function addUser(name) {
-	    if (name === '') return;
-	    Ω('I\'m going to add the user: ' + name);
-	    this.props.store();
+	  generateUserList: function generateUserList() {
+	    return this.props.appState.users.map(function (user) {
+	      return _react2.default.createElement(
+	        'li',
+	        null,
+	        user
+	      );
+	    });
 	  },
 	
 	  render: function render() {
@@ -19780,7 +19788,7 @@
 	        null,
 	        'shortstraw'
 	      ),
-	      _react2.default.createElement(_UserList2.default, { users: this.state.users }),
+	      _react2.default.createElement(_UserList2.default, { users: this.generateUserList() }),
 	      _react2.default.createElement(_AddUserForm2.default, { addUser: this.addUser })
 	    );
 	  }
@@ -20689,7 +20697,8 @@
 	
 	    case 'ADD USER':
 	      var newState = (0, _clone2.default)(state);
-	      newState[users].push(action.user);
+	      newState.users.push(action.user);
+	      console.log('new state', newState);
 	      return newState;
 	
 	    default:
