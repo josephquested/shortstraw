@@ -9,12 +9,16 @@ export default React.createClass({
     }
   },
 
+  addUser: function (name) {
+    console.log(`I'm going to add the user: ${name}`)
+  },
+
   render () {
     return (
       <div className='app'>
         <h1>shortstraw</h1>
         <UserList users={this.state.users} />
-        <AddUserForm />
+        <AddUserForm addUser={this.addUser} />
       </div>
     )
   }

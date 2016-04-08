@@ -60,7 +60,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	global.Ω = __webpack_require__(161);
+	global.Ω = __webpack_require__(162);
 	
 	var render = function render() {
 	  _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
@@ -19741,7 +19741,7 @@
 	
 	var _UserList2 = _interopRequireDefault(_UserList);
 	
-	var _AddUserForm = __webpack_require__(162);
+	var _AddUserForm = __webpack_require__(161);
 	
 	var _AddUserForm2 = _interopRequireDefault(_AddUserForm);
 	
@@ -19768,6 +19768,10 @@
 	    };
 	  },
 	
+	  addUser: function addUser(name) {
+	    console.log('I\'m going to add the user: ' + name);
+	  },
+	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -19778,7 +19782,7 @@
 	        'shortstraw'
 	      ),
 	      _react2.default.createElement(_UserList2.default, { users: this.state.users }),
-	      _react2.default.createElement(_AddUserForm2.default, null)
+	      _react2.default.createElement(_AddUserForm2.default, { addUser: this.addUser })
 	    );
 	  }
 	});
@@ -19816,19 +19820,6 @@
 
 /***/ },
 /* 161 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	module.exports = function lomega() {
-	  var args = Array.prototype.slice.call(arguments);
-	  args.forEach(function (arg) {
-	    console.log(arg);
-	  });
-	};
-
-/***/ },
-/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19845,13 +19836,27 @@
 	
 	exports.default = _react2.default.createClass({
 	  displayName: 'AddUserForm',
+	
+	  handleNameField: function handleNameField(e) {
+	    this.setState({
+	      name: e.target.value
+	    });
+	  },
+	
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    this.props.addUser(this.state.name);
+	  },
+	
 	  render: function render() {
+	    var _this = this;
+	
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'add-user-form' },
 	      _react2.default.createElement(
 	        'form',
-	        null,
+	        { onSubmit: this.handleSubmit },
 	        _react2.default.createElement(
 	          'span',
 	          null,
@@ -19860,13 +19865,33 @@
 	            null,
 	            'Name:'
 	          ),
-	          _react2.default.createElement('input', { type: 'text' }),
-	          _react2.default.createElement('button', null)
+	          _react2.default.createElement('input', { type: 'text', onChange: this.handleNameField }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'button',
+	              onClick: function onClick() {
+	                _this.props.addUser(_this.state.name);
+	              } },
+	            'Add User'
+	          )
 	        )
 	      )
 	    );
 	  }
 	});
+
+/***/ },
+/* 162 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	module.exports = function lomega() {
+	  var args = Array.prototype.slice.call(arguments);
+	  args.forEach(function (arg) {
+	    console.log(arg);
+	  });
+	};
 
 /***/ }
 /******/ ]);
