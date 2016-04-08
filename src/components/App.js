@@ -5,12 +5,14 @@ import AddUserForm from './AddUserForm'
 export default React.createClass({
   getInitialState: function () {
     return {
-      users: [<li>Charles</li>, <li>Simon</li>, <li>Mix</li>]
+      users: this.props.appState.users
     }
   },
 
   addUser: function (name) {
-    console.log(`I'm going to add the user: ${name}`)
+    if (name === '') return
+    Ω(`I'm going to add the user: ${name}`)
+    this.props.store()
   },
 
   render () {

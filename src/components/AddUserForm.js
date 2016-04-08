@@ -1,6 +1,12 @@
 import React from 'react'
 
 export default React.createClass({
+  getInitialState: function () {
+    return {
+      name: ''
+    }
+  },
+
   handleNameField: function (e) {
     this.setState({
       name: e.target.value
@@ -10,6 +16,7 @@ export default React.createClass({
   handleSubmit: function (e) {
     e.preventDefault()
     this.props.addUser(this.state.name)
+    this.setState({name: ''})
   },
 
   render () {
@@ -18,9 +25,13 @@ export default React.createClass({
         <form onSubmit={this.handleSubmit}>
           <span>
             <label>Name:</label>
-            <input type='text' onChange={this.handleNameField}></input>
+            <input
+              type='text'
+              onChange={this.handleNameField}
+              value={this.state.name}>
+            </input>
             <button type='button'
-              onClick={() => {this.props.addUser(this.state.name)}}>
+              onClick={this.handleSubmit}>
               Add User
             </button>
           </span>
