@@ -19761,21 +19761,10 @@
 	
 	  addUser: function addUser(user) {
 	    if (user === '') return;
-	    Ω('I\'m going to add the user: ' + user);
 	    this.props.store.dispatch({
 	      type: 'ADD USER',
 	      state: this.props.appState,
 	      user: user
-	    });
-	  },
-	
-	  generateUserList: function generateUserList() {
-	    return this.props.appState.users.map(function (user) {
-	      return _react2.default.createElement(
-	        'li',
-	        null,
-	        user
-	      );
 	    });
 	  },
 	
@@ -19788,7 +19777,7 @@
 	        null,
 	        'shortstraw'
 	      ),
-	      _react2.default.createElement(_UserList2.default, { users: this.generateUserList() }),
+	      _react2.default.createElement(_UserList2.default, { users: this.props.appState.users }),
 	      _react2.default.createElement(_AddUserForm2.default, { addUser: this.addUser })
 	    );
 	  }
@@ -19808,10 +19797,21 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _User = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./User\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _User2 = _interopRequireDefault(_User);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _react2.default.createClass({
 	  displayName: 'UserList',
+	
+	  generateUserList: function generateUserList() {
+	    return this.props.users.map(function (user, index) {
+	      return _react2.default.createElement(_User2.default, { key: index, name: user });
+	    });
+	  },
+	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -19819,7 +19819,7 @@
 	      _react2.default.createElement(
 	        'ul',
 	        null,
-	        this.props.users
+	        this.generateUserList()
 	      )
 	    );
 	  }
@@ -20698,7 +20698,6 @@
 	    case 'ADD USER':
 	      var newState = (0, _clone2.default)(state);
 	      newState.users.push(action.user);
-	      console.log('new state', newState);
 	      return newState;
 	
 	    default:
