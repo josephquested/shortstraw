@@ -66,7 +66,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	global.Ω = __webpack_require__(162);
+	global.Ω = __webpack_require__(181);
 	
 	var store = (0, _redux.createStore)(_reducer2.default);
 	
@@ -19750,7 +19750,7 @@
 	
 	var _UserList2 = _interopRequireDefault(_UserList);
 	
-	var _AddUserForm = __webpack_require__(161);
+	var _AddUserForm = __webpack_require__(162);
 	
 	var _AddUserForm2 = _interopRequireDefault(_AddUserForm);
 	
@@ -19797,7 +19797,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _User = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./User\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _User = __webpack_require__(161);
 	
 	var _User2 = _interopRequireDefault(_User);
 	
@@ -19827,6 +19827,36 @@
 
 /***/ },
 /* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'User',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'li',
+	      { className: 'user-name' },
+	      _react2.default.createElement('button', { className: 'delete-button', onClick: function onClick() {
+	          Ω('hello');
+	        } }),
+	      this.props.name
+	    );
+	  }
+	});
+
+/***/ },
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19892,19 +19922,6 @@
 	    );
 	  }
 	});
-
-/***/ },
-/* 162 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	module.exports = function lomega() {
-	  var args = Array.prototype.slice.call(arguments);
-	  args.forEach(function (arg) {
-	    console.log(arg);
-	  });
-	};
 
 /***/ },
 /* 163 */
@@ -22630,6 +22647,19 @@
 			module.webpackPolyfill = 1;
 		}
 		return module;
+	};
+
+/***/ },
+/* 181 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	module.exports = function lomega() {
+	  var args = Array.prototype.slice.call(arguments);
+	  args.forEach(function (arg) {
+	    console.log(arg);
+	  });
 	};
 
 /***/ }
