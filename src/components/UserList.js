@@ -8,7 +8,8 @@ export default React.createClass({
         <User
           key={index}
           index={index}
-          name={user}
+          name={user.name}
+          happiness={user.happiness}
           deleteUser={this.props.deleteUser}
         />
       )

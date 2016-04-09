@@ -19750,27 +19750,48 @@
 	
 	var _UserList2 = _interopRequireDefault(_UserList);
 	
-	var _AddUserForm = __webpack_require__(162);
+	var _TaskList = __webpack_require__(182);
 	
-	var _AddUserForm2 = _interopRequireDefault(_AddUserForm);
+	var _TaskList2 = _interopRequireDefault(_TaskList);
+	
+	var _AddForm = __webpack_require__(184);
+	
+	var _AddForm2 = _interopRequireDefault(_AddForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _react2.default.createClass({
 	  displayName: 'App',
 	
-	  addUser: function addUser(user) {
-	    if (user === '') return;
+	  addUser: function addUser(name) {
+	    if (name === '') return;
 	    this.props.store.dispatch({
 	      type: 'ADD USER',
 	      state: this.props.appState,
-	      user: user
+	      name: name
 	    });
 	  },
 	
 	  deleteUser: function deleteUser(index) {
 	    this.props.store.dispatch({
 	      type: 'DELETE USER',
+	      state: this.props.appState,
+	      index: index
+	    });
+	  },
+	
+	  addTask: function addTask(name) {
+	    if (name === '') return;
+	    this.props.store.dispatch({
+	      type: 'ADD TASK',
+	      state: this.props.appState,
+	      name: name
+	    });
+	  },
+	
+	  deleteTask: function deleteTask(index) {
+	    this.props.store.dispatch({
+	      type: 'DELETE TASK',
 	      state: this.props.appState,
 	      index: index
 	    });
@@ -19789,7 +19810,12 @@
 	        users: this.props.appState.users,
 	        deleteUser: this.deleteUser
 	      }),
-	      _react2.default.createElement(_AddUserForm2.default, { addUser: this.addUser })
+	      _react2.default.createElement(_AddForm2.default, { addItem: this.addUser, type: 'User' }),
+	      _react2.default.createElement(_TaskList2.default, {
+	        tasks: this.props.appState.tasks,
+	        deleteTask: this.deleteTask
+	      }),
+	      _react2.default.createElement(_AddForm2.default, { addItem: this.addTask, type: 'Task' })
 	    );
 	  }
 	});
@@ -19824,7 +19850,8 @@
 	      return _react2.default.createElement(_User2.default, {
 	        key: index,
 	        index: index,
-	        name: user,
+	        name: user.name,
+	        happiness: user.happiness,
 	        deleteUser: _this.props.deleteUser
 	      });
 	    });
@@ -19872,80 +19899,24 @@
 	        onClick: function onClick() {
 	          _this.props.deleteUser(_this.props.index);
 	        } }),
-	      this.props.name
-	    );
-	  }
-	});
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = _react2.default.createClass({
-	  displayName: 'AddUserForm',
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      name: ''
-	    };
-	  },
-	
-	  handleNameField: function handleNameField(e) {
-	    this.setState({
-	      name: e.target.value
-	    });
-	  },
-	
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	    this.props.addUser(this.state.name);
-	    this.setState({ name: '' });
-	  },
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'add-user-form' },
 	      _react2.default.createElement(
-	        'form',
-	        { onSubmit: this.handleSubmit },
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            'Name:'
-	          ),
-	          _react2.default.createElement('input', {
-	            type: 'text',
-	            onChange: this.handleNameField,
-	            value: this.state.name }),
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'button',
-	              onClick: this.handleSubmit },
-	            'Add User'
-	          )
-	        )
+	        'span',
+	        { className: 'user-name' },
+	        this.props.name
+	      ),
+	      '-',
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'user-happiness' },
+	        'Happiness: ',
+	        this.props.happiness
 	      )
 	    );
 	  }
 	});
 
 /***/ },
+/* 162 */,
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -20736,11 +20707,19 @@
 	
 	  switch (action.type) {
 	    case 'ADD USER':
-	      newState.users.push(action.user);
+	      newState.users.push({ name: action.name, happiness: 0 });
 	      return newState;
 	
 	    case 'DELETE USER':
 	      newState.users.splice(action.index, 1);
+	      return newState;
+	
+	    case 'ADD TASK':
+	      newState.tasks.push({ name: action.name });
+	      return newState;
+	
+	    case 'DELETE TASK':
+	      newState.tasks.splice(action.index, 1);
 	      return newState;
 	
 	    default:
@@ -22687,6 +22666,162 @@
 	    console.log(arg);
 	  });
 	};
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Task = __webpack_require__(183);
+	
+	var _Task2 = _interopRequireDefault(_Task);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'TaskList',
+	
+	  generateTaskList: function generateTaskList() {
+	    var _this = this;
+	
+	    return this.props.tasks.map(function (task, index) {
+	      return _react2.default.createElement(_Task2.default, {
+	        key: index,
+	        index: index,
+	        name: task.name,
+	        deleteTask: _this.props.deleteTask
+	      });
+	    });
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'task-list' },
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        this.generateTaskList()
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'Task',
+	  render: function render() {
+	    var _this = this;
+	
+	    return _react2.default.createElement(
+	      'li',
+	      { className: 'task-name' },
+	      _react2.default.createElement('button', {
+	        className: 'delete-button',
+	        onClick: function onClick() {
+	          _this.props.deleteTask(_this.props.index);
+	        } }),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'task-name' },
+	        this.props.name
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'AddForm',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      name: ''
+	    };
+	  },
+	
+	  handleNameField: function handleNameField(e) {
+	    this.setState({
+	      name: e.target.value
+	    });
+	  },
+	
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    this.props.addItem(this.state.name);
+	    this.setState({ name: '' });
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'add-form' },
+	      _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            this.props.type,
+	            ' Name:'
+	          ),
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            onChange: this.handleNameField,
+	            value: this.state.name }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'button',
+	              onClick: this.handleSubmit },
+	            'Add'
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
 
 /***/ }
 /******/ ]);

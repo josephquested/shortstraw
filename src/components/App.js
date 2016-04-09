@@ -1,20 +1,38 @@
 import React from 'react'
 import UserList from './UserList'
-import AddUserForm from './AddUserForm'
+import TaskList from './TaskList'
+import AddForm from './AddForm'
 
 export default React.createClass({
-  addUser: function (user) {
-    if (user === '') return
+  addUser: function (name) {
+    if (name === '') return
     this.props.store.dispatch({
       type: 'ADD USER',
       state: this.props.appState,
-      user: user
+      name: name
     })
   },
 
   deleteUser: function (index) {
     this.props.store.dispatch({
       type: 'DELETE USER',
+      state: this.props.appState,
+      index: index
+    })
+  },
+
+  addTask: function (name) {
+    if (name === '') return
+    this.props.store.dispatch({
+      type: 'ADD TASK',
+      state: this.props.appState,
+      name: name
+    })
+  },
+
+  deleteTask: function (index) {
+    this.props.store.dispatch({
+      type: 'DELETE TASK',
       state: this.props.appState,
       index: index
     })
@@ -28,7 +46,12 @@ export default React.createClass({
           users={this.props.appState.users}
           deleteUser={this.deleteUser}
         />
-        <AddUserForm addUser={this.addUser} />
+        <AddForm addItem={this.addUser} type='User' />
+        <TaskList
+          tasks={this.props.appState.tasks}
+          deleteTask={this.deleteTask}
+        />
+        <AddForm addItem={this.addTask} type='Task'/>
       </div>
     )
   }

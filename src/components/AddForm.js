@@ -15,16 +15,16 @@ export default React.createClass({
 
   handleSubmit: function (e) {
     e.preventDefault()
-    this.props.addUser(this.state.name)
+    this.props.addItem(this.state.name)
     this.setState({name: ''})
   },
 
   render () {
     return (
-      <div className='add-user-form'>
+      <div className='add-form'>
         <form onSubmit={this.handleSubmit}>
           <span>
-            <label>Name:</label>
+            <label>{this.props.type} Name:</label>
             <input
               type='text'
               onChange={this.handleNameField}
@@ -32,7 +32,7 @@ export default React.createClass({
             </input>
             <button type='button'
               onClick={this.handleSubmit}>
-              Add User
+              Add
             </button>
           </span>
         </form>

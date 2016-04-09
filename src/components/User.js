@@ -8,7 +8,13 @@ export default React.createClass({
           className='delete-button'
           onClick={() => {this.props.deleteUser(this.props.index)}}>
         </button>
-        {this.props.name}
+        <span className='user-name'>
+          {this.props.name}
+        </span>
+        -
+        <span className='user-happiness'>
+          Happiness: {this.props.happiness}
+        </span>
       </li>
     )
   }
