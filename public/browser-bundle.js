@@ -19768,6 +19768,14 @@
 	    });
 	  },
 	
+	  deleteUser: function deleteUser(index) {
+	    this.props.store.dispatch({
+	      type: 'DELETE USER',
+	      state: this.props.appState,
+	      index: index
+	    });
+	  },
+	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -19777,7 +19785,10 @@
 	        null,
 	        'shortstraw'
 	      ),
-	      _react2.default.createElement(_UserList2.default, { users: this.props.appState.users }),
+	      _react2.default.createElement(_UserList2.default, {
+	        users: this.props.appState.users,
+	        deleteUser: this.deleteUser
+	      }),
 	      _react2.default.createElement(_AddUserForm2.default, { addUser: this.addUser })
 	    );
 	  }
@@ -19807,8 +19818,15 @@
 	  displayName: 'UserList',
 	
 	  generateUserList: function generateUserList() {
+	    var _this = this;
+	
 	    return this.props.users.map(function (user, index) {
-	      return _react2.default.createElement(_User2.default, { key: index, name: user });
+	      return _react2.default.createElement(_User2.default, {
+	        key: index,
+	        index: index,
+	        name: user,
+	        deleteUser: _this.props.deleteUser
+	      });
 	    });
 	  },
 	
@@ -19844,11 +19862,15 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'User',
 	  render: function render() {
+	    var _this = this;
+	
 	    return _react2.default.createElement(
 	      'li',
 	      { className: 'user-name' },
-	      _react2.default.createElement('button', { className: 'delete-button', onClick: function onClick() {
-	          Ω('hello');
+	      _react2.default.createElement('button', {
+	        className: 'delete-button',
+	        onClick: function onClick() {
+	          _this.props.deleteUser(_this.props.index);
 	        } }),
 	      this.props.name
 	    );
@@ -20710,11 +20732,15 @@
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? { users: [], tasks: [] } : arguments[0];
 	  var action = arguments[1];
 	
-	  switch (action.type) {
+	  var newState = (0, _clone2.default)(state);
 	
+	  switch (action.type) {
 	    case 'ADD USER':
-	      var newState = (0, _clone2.default)(state);
 	      newState.users.push(action.user);
+	      return newState;
+	
+	    case 'DELETE USER':
+	      newState.users.splice(action.index, 1);
 	      return newState;
 	
 	    default:

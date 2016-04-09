@@ -12,11 +12,22 @@ export default React.createClass({
     })
   },
 
+  deleteUser: function (index) {
+    this.props.store.dispatch({
+      type: 'DELETE USER',
+      state: this.props.appState,
+      index: index
+    })
+  },
+
   render () {
     return (
       <div className='app'>
         <h1>shortstraw</h1>
-        <UserList users={this.props.appState.users} />
+        <UserList
+          users={this.props.appState.users}
+          deleteUser={this.deleteUser}
+        />
         <AddUserForm addUser={this.addUser} />
       </div>
     )

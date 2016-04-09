@@ -4,7 +4,14 @@ import User from './User'
 export default React.createClass({
   generateUserList: function () {
     return this.props.users.map((user, index) => {
-      return (<User key={index} name={user} />)
+      return (
+        <User
+          key={index}
+          index={index}
+          name={user}
+          deleteUser={this.props.deleteUser}
+        />
+      )
     })
   },
 

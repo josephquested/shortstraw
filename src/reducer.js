@@ -1,11 +1,15 @@
 import clone from 'clone'
 
 export default (state = {users: [], tasks: []}, action) => {
-  switch (action.type) {
+  let newState = clone(state)
 
+  switch (action.type) {
     case 'ADD USER':
-      let newState = clone(state)
       newState.users.push(action.user)
+      return newState
+
+    case 'DELETE USER':
+      newState.users.splice(action.index, 1)
       return newState
 
     default:
