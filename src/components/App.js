@@ -2,8 +2,24 @@ import React from 'react'
 import UserList from './UserList'
 import TaskList from './TaskList'
 import AddForm from './AddForm'
+import Modal from 'react-modal'
 
 export default React.createClass({
+  getInitialState: function () {
+    return ({ modalIsOpen: false, activeUser: { name: undefined } })
+  },
+
+  openModal: function (user) {
+    this.setState({ modalIsOpen: true, activeUser: user })
+  },
+
+  afterOpenModal: function () {
+  },
+
+  closeModal: function () {
+    this.setState({ modalIsOpen: false, activeUser: { name: 'null' } })
+  },
+
   addUser: function (name) {
     if (name === '') return
     this.props.store.dispatch({
@@ -42,9 +58,20 @@ export default React.createClass({
     return (
       <div className='app'>
         <h1>shortstraw</h1>
+
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={Modal.defaultStyles}>
+          <h2 ref="subtitle">{this.state.activeUser.name}'s Preferred Tasks</h2>
+          <button onClick={this.closeModal}> Close </button>
+        </Modal>
+
         <UserList
           users={this.props.appState.users}
           deleteUser={this.deleteUser}
+          openModal={this.openModal}
         />
         <AddForm addItem={this.addUser} type='User' />
         <TaskList

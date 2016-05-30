@@ -3,18 +3,25 @@ import React from 'react'
 export default React.createClass({
   render () {
     return (
-      <li className='user-name'>
-        <button
-          className='delete-button'
-          onClick={() => {this.props.deleteUser(this.props.index)}}>
-        </button>
-        <span className='user-name'>
+      <li className='line-item'>
+        <span className='user'>
           {this.props.name}
         </span>
         -
         <span className='user-happiness'>
           Happiness: {this.props.happiness}
         </span>
+        -
+        <button
+          className='modal-button'
+          onClick={() => {this.props.openModal(this.props)}}>
+          Set Preferred Tasks
+        </button>
+        <button
+          className='delete-button'
+          onClick={() => {this.props.deleteUser(this.props.index)}}>
+          Delete User
+        </button>
       </li>
     )
   }

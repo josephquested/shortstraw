@@ -26,11 +26,12 @@ export default React.createClass({
           <span>
             <label>{this.props.type} Name:</label>
             <input
+              className='add-form-input'
               type='text'
               onChange={this.handleNameField}
               value={this.state.name}>
             </input>
-            <button type='button'
+            <button
               onClick={this.handleSubmit}>
               Add
             </button>

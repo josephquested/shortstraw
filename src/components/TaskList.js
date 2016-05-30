@@ -18,6 +18,7 @@ export default React.createClass({
   render () {
     return (
       <div className='task-list'>
+        <h2>Tasks</h2>
         <ul>
           {this.generateTaskList()}
         </ul>

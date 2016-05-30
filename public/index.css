@@ -7,22 +7,37 @@ body {
 
 h1 {
   font-size: 5vw;
+  margin-bottom: 25px;
   text-align: center;
 }
 
-/*div {
-  border-style: solid;
-  border-color: rgb(156, 234, 255);
-}*/
+h2 {
+  font-size: 3vw;
+  margin-bottom: 25px;
+  text-align: center;
+}
 
 ul {
   list-style-type: none;
 }
 
-/* div/span classes */
+/* item */
+
+.line-item {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* user */
+
+.user {
+  margin-right: 20px;
+}
 
 .user-happiness {
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 .user-name {
@@ -30,37 +45,25 @@ ul {
   margin-right: 20px;
 }
 
-.task-name {
+.modal-button {
   margin-left: 20px;
+  margin-right: 10px;
 }
 
-/* delete button */
+/* task */
 
-.delete-button {
-	border:1px solid transparent;
-	background-color: transparent;
-	vertical-align: middle;
-  outline: 0;
-  cursor: pointer;
+.task {
+  margin-right: 20px;
 }
 
-.delete-button:after {
-	content: "X";
-	display: block;
-	width: 15px;
-	height: 15px;
-	background-color: #FA9595;
-	z-index:1;
-	right: 35px;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	padding: 2px;
-	border-radius: 50%;
-	text-align: center;
-	color: white;
-	font-weight: normal;
-	font-size: 12px;
-	box-shadow: 0 0 2px #E50F0F;
-	cursor: pointer;
+ /* add */
+
+.add-form {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.add-form-input {
+  margin-left: 10px;
+  margin-right: 10px;
 }

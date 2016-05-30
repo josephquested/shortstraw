@@ -11,6 +11,7 @@ export default React.createClass({
           name={user.name}
           happiness={user.happiness}
           deleteUser={this.props.deleteUser}
+          openModal={this.props.openModal}
         />
       )
     })
@@ -19,6 +20,7 @@ export default React.createClass({
   render () {
     return (
       <div className='user-list'>
+        <h2>Users</h2>
         <ul>
           {this.generateUserList()}
         </ul>
