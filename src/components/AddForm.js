@@ -1,23 +1,24 @@
 import React from 'react'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      name: ''
-    }
-  },
+export default class AddForm extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { name: '' }
+    this.handleNameField = this.handleNameField.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
-  handleNameField: function (e) {
+  handleNameField (e) {
     this.setState({
       name: e.target.value
     })
-  },
+  }
 
-  handleSubmit: function (e) {
+  handleSubmit (e) {
     e.preventDefault()
     this.props.addItem(this.state.name)
     this.setState({name: ''})
-  },
+  }
 
   render () {
     return (
@@ -40,4 +41,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}

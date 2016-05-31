@@ -1,6 +1,10 @@
 import React from 'react'
 
-export default React.createClass({
+export default class Task extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render () {
     return (
       <li className='line-item'>
@@ -21,4 +25,4 @@ export default React.createClass({
       </li>
     )
   }
-})
+}
