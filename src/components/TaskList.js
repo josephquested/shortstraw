@@ -1,8 +1,13 @@
 import React from 'react'
 import Task from './Task'
 
-export default React.createClass({
-  generateTaskList: function () {
+export default class TaskList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.generateTaskList = this.generateTaskList.bind(this)
+  }
+
+  generateTaskList () {
     return this.props.tasks.map((task, index) => {
       return (
         <Task
@@ -13,7 +18,7 @@ export default React.createClass({
         />
       )
     })
-  },
+  }
 
   render () {
     return (
@@ -25,4 +30,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}

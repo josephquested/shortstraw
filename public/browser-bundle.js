@@ -19958,54 +19958,76 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _react2.default.createClass({
-	  displayName: 'User',
-	  render: function render() {
-	    var _this = this;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	    return _react2.default.createElement(
-	      'li',
-	      { className: 'line-item' },
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'user' },
-	        this.props.name
-	      ),
-	      '-',
-	      _react2.default.createElement(
-	        'span',
-	        { className: 'user-happiness' },
-	        'Happiness: ',
-	        this.props.happiness
-	      ),
-	      '-',
-	      _react2.default.createElement(
-	        'button',
-	        {
-	          className: 'modal-button',
-	          onClick: function onClick() {
-	            _this.props.openModal(_this.props);
-	          } },
-	        'Set Preferred Tasks'
-	      ),
-	      _react2.default.createElement(
-	        'button',
-	        {
-	          className: 'delete-button',
-	          onClick: function onClick() {
-	            _this.props.deleteUser(_this.props.index);
-	          } },
-	        'Delete User'
-	      )
-	    );
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var User = function (_React$Component) {
+	  _inherits(User, _React$Component);
+	
+	  function User(props) {
+	    _classCallCheck(this, User);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(User).call(this, props));
 	  }
-	});
+	
+	  _createClass(User, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'li',
+	        { className: 'line-item' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'user' },
+	          this.props.name
+	        ),
+	        '-',
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'user-happiness' },
+	          'Happiness: ',
+	          this.props.happiness
+	        ),
+	        '-',
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            className: 'modal-button',
+	            onClick: function onClick() {
+	              _this2.props.openModal(_this2.props);
+	            } },
+	          'Set Preferred Tasks'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            className: 'delete-button',
+	            onClick: function onClick() {
+	              _this2.props.deleteUser(_this2.props.index);
+	            } },
+	          'Delete User'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return User;
+	}(_react2.default.Component);
+	
+	exports.default = User;
 
 /***/ },
 /* 162 */
@@ -20017,6 +20039,8 @@
 	  value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -20027,39 +20051,62 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _react2.default.createClass({
-	  displayName: 'TaskList',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	  generateTaskList: function generateTaskList() {
-	    var _this = this;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	    return this.props.tasks.map(function (task, index) {
-	      return _react2.default.createElement(_Task2.default, {
-	        key: index,
-	        index: index,
-	        name: task.name,
-	        deleteTask: _this.props.deleteTask
-	      });
-	    });
-	  },
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'task-list' },
-	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'Tasks'
-	      ),
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        this.generateTaskList()
-	      )
-	    );
+	var TaskList = function (_React$Component) {
+	  _inherits(TaskList, _React$Component);
+	
+	  function TaskList(props) {
+	    _classCallCheck(this, TaskList);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TaskList).call(this, props));
+	
+	    _this.generateTaskList = _this.generateTaskList.bind(_this);
+	    return _this;
 	  }
-	});
+	
+	  _createClass(TaskList, [{
+	    key: 'generateTaskList',
+	    value: function generateTaskList() {
+	      var _this2 = this;
+	
+	      return this.props.tasks.map(function (task, index) {
+	        return _react2.default.createElement(_Task2.default, {
+	          key: index,
+	          index: index,
+	          name: task.name,
+	          deleteTask: _this2.props.deleteTask
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'task-list' },
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Tasks'
+	        ),
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          this.generateTaskList()
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return TaskList;
+	}(_react2.default.Component);
+	
+	exports.default = TaskList;
 
 /***/ },
 /* 163 */

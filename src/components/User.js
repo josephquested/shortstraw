@@ -1,6 +1,10 @@
 import React from 'react'
 
-export default React.createClass({
+export default class User extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render () {
     return (
       <li className='line-item'>
@@ -25,4 +29,4 @@ export default React.createClass({
       </li>
     )
   }
-})
+}
